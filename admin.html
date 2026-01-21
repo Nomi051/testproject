@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<script>
+  if(localStorage.getItem("isLoggedIn") !== "true" || localStorage.getItem("isAdmin") !== "true"){
+    window.location.href = "login.html";
+  }
+</script>
+
+<div class="dashboard">
+  <h1>Admin Panel - Project Approvals</h1>
+  <button onclick="logout()" class="secondary-btn">Logout</button>
+  <div id="projectsContainer" class="projects-container"></div>
+</div>
+
+<!-- Edit/Amend Modal -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h2>Edit Project</h2>
+    <form id="editForm">
+      <input type="hidden" id="editIndex">
+      <label>Project Name</label>
+      <input type="text" id="editName" required>
+      <label>Location</label>
+      <input type="text" id="editLocation" required>
+      <label>Category</label>
+      <select id="editCategory" required>
+        <option value="">Select</option>
+        <option>Renewable Energy</option>
+        <option>Afforestation</option>
+        <option>Waste Management</option>
+      </select>
+      <div class="actions">
+        <button type="submit" class="primary-btn">Save Changes</button>
+        <button type="button" id="closeEdit" class="secondary-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+<script>
+function logout(){
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+</script>
+</body>
+</html>

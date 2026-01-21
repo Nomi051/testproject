@@ -2,47 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Carbon Credit Dashboard</title>
+  <title>User Dashboard</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<script>
+  if (localStorage.getItem("isLoggedIn") !== "true" || localStorage.getItem("isAdmin") === "true") {
+    window.location.href = "login.html";
+  }
+</script>
 
 <div class="dashboard">
   <h1>Carbon Credit Projects</h1>
-
-  <button id="openCreateForm" class="primary-btn">
-    + Create New Project
-  </button>
-
+  <button id="openCreateForm" class="primary-btn">+ Create New Project</button>
+  <button onclick="logout()" class="secondary-btn">Logout</button>
   <div id="projectsContainer" class="projects-container"></div>
 </div>
 
-<!-- CREATE PROJECT MODAL -->
+<!-- CREATE / EDIT MODAL -->
 <div id="createModal" class="modal">
   <div class="modal-content">
-    <h2>Create New Project</h2>
-
+    <h2 id="modalTitle">Create Project</h2>
     <form id="projectForm">
+      <input type="hidden" id="editIndex">
       <label>Project Name</label>
       <input type="text" id="name" required>
-
-      <label>Project Location</label>
+      <label>Location</label>
       <input type="text" id="location" required>
-
-      <label>Project Category</label>
+      <label>Category</label>
       <select id="category" required>
         <option value="">Select</option>
         <option>Renewable Energy</option>
         <option>Afforestation</option>
         <option>Waste Management</option>
-        <option>Energy Efficiency</option>
       </select>
-
-      <label>Upload Report</label>
-      <input type="file" id="report" required>
-
+      <label>Upload PDF Report</label>
+      <input type="file" id="report" accept="application/pdf">
       <div class="actions">
-        <button type="submit" class="primary-btn">Submit</button>
+        <button type="submit" class="primary-btn">Submit for Approval</button>
         <button type="button" id="closeCreate" class="secondary-btn">Cancel</button>
       </div>
     </form>
@@ -53,20 +51,30 @@
 <div id="detailsModal" class="modal">
   <div class="modal-content">
     <h2>Project Details</h2>
-
     <table class="details-table">
-      <tr><th>Project Name</th><td id="dName"></td></tr>
+      <tr><th>Name</th><td id="dName"></td></tr>
       <tr><th>Location</th><td id="dLocation"></td></tr>
       <tr><th>Category</th><td id="dCategory"></td></tr>
       <tr><th>Report</th><td id="dReport"></td></tr>
+      <tr><th>Status</th><td id="dStatus"></td></tr>
     </table>
-
-    <div class="actions">
-      <button id="closeDetails" class="secondary-btn">Close</button>
-    </div>
+    <div id="detailsButtons" style="margin-top:10px; display:flex; gap:10px;"></div>
+    <button id="closeDetails" class="secondary-btn">Close</button>
   </div>
 </div>
 
-<script src="script.js"></script>
+<!-- MONITORING MODAL -->
+<div id="monitorModal" class="modal">
+  <div class="modal-content">
+    <h2 id="monitorTitle">Monitoring</h2>
+    <canvas id="monitorChart" width="400" height="200"></canvas>
+    <button id="closeMonitor" class="secondary-btn">Close</button>
+  </div>
+</div>
+
+<script src="dashboard.js"></script>
+<script>
+function logout() { localStorage.clear(); window.location.href="login.html"; }
+</script>
 </body>
 </html>
