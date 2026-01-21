@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Carbon Credit Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+  <h1>Carbon Credit Projects</h1>
+
+  <button id="openCreateForm" class="primary-btn">
+    + Create New Project
+  </button>
+
+  <div id="projectsContainer" class="projects-container"></div>
+</div>
+
+<!-- CREATE PROJECT MODAL -->
+<div id="createModal" class="modal">
+  <div class="modal-content">
+    <h2>Create New Project</h2>
+
+    <form id="projectForm">
+      <label>Project Name</label>
+      <input type="text" id="name" required>
+
+      <label>Project Location</label>
+      <input type="text" id="location" required>
+
+      <label>Project Category</label>
+      <select id="category" required>
+        <option value="">Select</option>
+        <option>Renewable Energy</option>
+        <option>Afforestation</option>
+        <option>Waste Management</option>
+        <option>Energy Efficiency</option>
+      </select>
+
+      <label>Upload Report</label>
+      <input type="file" id="report" required>
+
+      <div class="actions">
+        <button type="submit" class="primary-btn">Submit</button>
+        <button type="button" id="closeCreate" class="secondary-btn">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DETAILS MODAL -->
+<div id="detailsModal" class="modal">
+  <div class="modal-content">
+    <h2>Project Details</h2>
+
+    <table class="details-table">
+      <tr><th>Project Name</th><td id="dName"></td></tr>
+      <tr><th>Location</th><td id="dLocation"></td></tr>
+      <tr><th>Category</th><td id="dCategory"></td></tr>
+      <tr><th>Report</th><td id="dReport"></td></tr>
+    </table>
+
+    <div class="actions">
+      <button id="closeDetails" class="secondary-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
